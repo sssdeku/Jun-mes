@@ -2,6 +2,9 @@ package com.xijun.model;
 
 import java.util.Date;
 
+import lombok.Builder;
+
+@Builder
 public class MesOrder {
     private Integer id;
 

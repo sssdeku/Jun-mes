@@ -8,7 +8,7 @@
 </head>
 <body>
 成功插入数据，id为 
-${sessionScope.mesOrder.orderId}
+${order.orderId}
 
 </body>
 </html>

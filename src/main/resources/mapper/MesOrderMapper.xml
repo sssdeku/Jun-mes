@@ -59,7 +59,7 @@
       #{orderOperator,jdbcType=VARCHAR}, #{orderOperateTime,jdbcType=TIMESTAMP}, #{orderOperateIp,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xijun.model.MesOrder" >
+  <insert id="insertSelective" parameterType="com.xijun.dto.MesOrderDto" >
     insert into mes_order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

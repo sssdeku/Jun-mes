@@ -1,5 +1,6 @@
 package com.xijun.dao;
 
+import com.xijun.dto.MesOrderDto;
 import com.xijun.model.MesOrder;
 
 public interface MesOrderMapper {
@@ -7,7 +8,7 @@ public interface MesOrderMapper {
 
     int insert(MesOrder record);
 
-    int insertSelective(MesOrder record);
+    int insertSelective(MesOrderDto record);
 
     MesOrder selectByPrimaryKey(Integer id);
 

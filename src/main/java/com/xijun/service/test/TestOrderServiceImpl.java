@@ -1,4 +1,4 @@
-package com.xijun.service.impl;
+package com.xijun.service.test;
 
 import javax.annotation.Resource;
 
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.xijun.dao.MesOrderMapper;
 import com.xijun.model.MesOrder;
-import com.xijun.service.TestOrderService;
 
 @Service
 public class TestOrderServiceImpl implements TestOrderService{

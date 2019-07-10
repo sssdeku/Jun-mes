@@ -1,4 +1,4 @@
-package com.xijun.controller;
+package com.xijun.controller.test;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xijun.model.MesOrder;
-import com.xijun.service.TestOrderService;
+import com.xijun.service.test.TestOrderService;
 
 @Controller
 public class TestController {
@@ -19,7 +19,7 @@ public class TestController {
 	TestOrderService testOrderService;
 	
 	
-	@RequestMapping("addOrder")
+/*	@RequestMapping("addOrder")
 	public ModelAndView addOrder(HttpServletRequest request, HttpServletResponse response) {
 		String orderId = request.getParameter("orderId");
 		
@@ -41,6 +41,6 @@ public class TestController {
 		}
 		return null;
 	}
-	
+	*/
 	
 }

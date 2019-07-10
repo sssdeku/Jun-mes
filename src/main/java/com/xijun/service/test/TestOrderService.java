@@ -1,4 +1,4 @@
-package com.xijun.service;
+package com.xijun.service.test;
 
 import org.springframework.stereotype.Service;
 
