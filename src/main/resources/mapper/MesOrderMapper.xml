@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xijun.dao.MesOrderMapper" >
-  <resultMap id="BaseResultMap" type="com.xijun.model.MesOrder" >
+  <resultMap id="BaseResultMap" type="com.xijun.dto.MesOrderDto" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="VARCHAR" />
     <result column="order_clientname" property="orderClientname" jdbcType="VARCHAR" />
@@ -43,7 +43,7 @@
     delete from mes_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xijun.model.MesOrder" >
+  <insert id="insert" parameterType="com.xijun.dto.MesOrderDto" >
     insert into mes_order (id, order_id, order_clientname, 
       order_productname, order_contractid, order_imgid, 
       order_materialname, order_cometime, order_committime, 
@@ -174,7 +174,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xijun.model.MesOrder" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.xijun.dto.MesOrderDto" >
     update mes_order
     <set >
       <if test="orderId != null" >
@@ -231,7 +231,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xijun.model.MesOrder" >
+  <update id="updateByPrimaryKey" parameterType="com.xijun.dto.MesOrderDto" >
     update mes_order
     set order_id = #{orderId,jdbcType=VARCHAR},
       order_clientname = #{orderClientname,jdbcType=VARCHAR},

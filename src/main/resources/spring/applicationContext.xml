@@ -114,7 +114,7 @@
 		<!-- 第一个*代表返回值 -->
 		<!-- 第二个*代表类名，包含service和serviceimpl -->
 		<!-- 第三个*代表方法 -->
-		<aop:pointcut id="serviceMethod" expression="execution(* com.haoyu.service.*.*(..))"/>
+		<aop:pointcut id="serviceMethod" expression="execution(* com.xijun.service.*.*(..))"/>
 		<!-- < aop:aspect>大多用于日志，缓存 -->
 		<!-- < aop:advisor>大多用于事务管理 -->
 		<!-- 区别在于 -->

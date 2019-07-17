@@ -1,6 +1,9 @@
 package com.xijun.service;
 
 import java.util.List;
+
+import com.xijun.beans.PageQuery;
+import com.xijun.param.SearchOrderParam;
 import com.xijun.param.MesOrderVo;
 public interface OrderService {
 
@@ -17,6 +20,9 @@ public interface OrderService {
 	
 	// 获取id集合
 	public List<String> createOrderIdsDefault(Long ocounts);
+	
+	public Object searchPageList(SearchOrderParam param, PageQuery page) ;
+	
 	
 	
 }

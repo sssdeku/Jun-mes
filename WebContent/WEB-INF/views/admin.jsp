@@ -161,15 +161,15 @@
 				</a> <b class="arrow"></b>
 					<ul class="submenu">
 						<li class=""><a class="popstyle"
-							href="/product/productinsert.page" target="_blank"> <i
+							href="/product/productInsert.page" target="_blank"> <i
 								class="menu-icon fa fa-caret-right"></i>材料管理
 						</a> <b class="arrow"></b></li>
-						<li class=""><a class="popstyle" href="/product/product.page"
+						<li class=""><a class="popstyle" href="/product/productBatchTo.page"
 							target="_blank"> <i class="menu-icon fa fa-caret-right"></i>
 								批量到库
 						</a> <b class="arrow"></b></li>
 						<li class=""><a class="popstyle"
-							href="/product/productCome.page" target="_blank"> <i
+							href="/product/productIn.page" target="_blank"> <i
 								class="menu-icon fa fa-caret-right"></i> 到库查询
 						</a> <b class="arrow"></b></li>
 						<li class=""><a class="popstyle"

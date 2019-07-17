@@ -51,20 +51,20 @@
 		var from = (pageNo - 1) * pageSize + 1;
 		//处理当前页为数字类型
 		var pageNo = parseInt(pageNo);
-		var skipNo=pageNo;
+		var skipNo = pageNo;
 		//定义视图内容[1][2]当前页[前一页][后一页]...
 		var view = {
 			from : from > total ? total : from,
 			to : (from + currentSize - 1) > total ? total
 					: (from + currentSize - 1),
 			total : total,
-			pageNo : pageNo,
-			skipNo:pageNo,
-			maxPageNo : maxPageNo,
-			nextPageNo : pageNo >= maxPageNo ? maxPageNo : (pageNo + 1),
-			beforePageNo : pageNo == 1 ? 1 : (pageNo - 1),
+			pageNo : pageNo,//1
+			skipNo: pageNo,
+			maxPageNo : maxPageNo,//2
+			nextPageNo : pageNo >= maxPageNo ? maxPageNo : (pageNo + 1),//2
+			beforePageNo : pageNo == 1 ? 1 : (pageNo - 1),//1
 			firstUrl : (pageNo == 1) ? '' : (url + paramStartChar
-					+ "pageNo=1&pageSize=" + pageSize),
+					+ "pageNo=1&pageSize=" + pageSize),//  /order/order.json?pageNo=1&pageSize=10
 			beforeUrl : (pageNo == 1) ? '' : (url + paramStartChar + "pageNo="
 					+ (pageNo - 1) + "&pageSize=" + pageSize),
 			nextUrl : (pageNo >= maxPageNo) ? '' : (url + paramStartChar
@@ -83,7 +83,7 @@
 					//阻止默认事件，冒泡
 					e.preventDefault();
 					//获取当前的skipno
-					var skipNo = $(".skiptxt").val();
+					var skipNo = $(".skiptxt").val();//1
 					if (skipNo != null && skipNo > 0) {
 						pageNo = parseInt(skipNo>=maxPageNo?maxPageNo:skipNo);
 						$(".skip").attr("data-target",pageNo).attr(//
@@ -91,7 +91,7 @@
 								url + paramStartChar + "pageNo=" + pageNo
 										+ "&pageSize=" + pageSize);
 					}
-					var targetUrl = $(this).attr("data-url");
+					var targetUrl = $(this).attr("data-url");//
 					//给每一个按钮添加指定的值	
 					$("#" + idElement + " .pageNo").val(
 							$(this).attr("data-target"));

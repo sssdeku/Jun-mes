@@ -10,7 +10,7 @@ public interface MesOrderMapper {
 
     int insertSelective(MesOrderDto record);
 
-    MesOrder selectByPrimaryKey(Integer id);
+    MesOrderDto selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(MesOrder record);
 

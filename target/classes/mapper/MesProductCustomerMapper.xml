@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xijun.dao.MesProductCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.xijun.dto.MesProductDto" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="product_orderid" property="productOrderid" jdbcType="INTEGER" />
+    <result column="product_planid" property="productPlanid" jdbcType="INTEGER" />
+    <result column="product_targetweight" property="productTargetweight" jdbcType="REAL" />
+    <result column="product_realweight" property="productRealweight" jdbcType="REAL" />
+    <result column="product_leftweight" property="productLeftweight" jdbcType="REAL" />
+    <result column="product_bakweight" property="productBakweight" jdbcType="REAL" />
+    <result column="product_irontype" property="productIrontype" jdbcType="VARCHAR" />
+    <result column="product_irontypeweight" property="productIrontypeweight" jdbcType="REAL" />
+    <result column="product_materialname" property="productMaterialname" jdbcType="VARCHAR" />
+    <result column="product_imgid" property="productImgid" jdbcType="VARCHAR" />
+    <result column="product_materialsource" property="productMaterialsource" jdbcType="VARCHAR" />
+    <result column="product_status" property="productStatus" jdbcType="INTEGER" />
+    <result column="product_remark" property="productRemark" jdbcType="VARCHAR" />
+    <result column="product_operator" property="productOperator" jdbcType="VARCHAR" />
+    <result column="product_operate_time" property="productOperateTime" jdbcType="TIMESTAMP" />
+    <result column="product_operate_ip" property="productOperateIp" jdbcType="VARCHAR" />
+  	<result column="product_heatnumber" property="productHeatNumber" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, p_id, product_id, product_orderid, product_planid, product_targetweight, product_realweight, 
+    product_leftweight, product_bakweight, product_irontype, product_irontypeweight, 
+    product_materialname, product_imgid, product_materialsource, product_status, product_remark, 
+    product_operator, product_operate_time, product_operate_ip,product_heatnumber
+  </sql>
+  
+  <select id="getProductCount" resultType="java.lang.Long">
+  	select count(1)
+  	from mes_product
+  </select>
+  
+  <select id="getProductCountsBySomeList" parameterType="map" resultType="int">
+  	select count(*)
+  	from mes_product
+  	<include refid="querySome" />
+  	
+  </select>
+  
+  <select id="getProductCountsBySomeListth" parameterType="map" resultType="int">
+  	select count(*)
+  	from mes_product
+  	<include refid="querySometh" />
+  </select>
+ 
+  
+  <select id="getProductBachList" parameterType="map" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from mes_product
+  	<include refid="querySome" />
+  	order by id desc
+  	limit #{page.offset},#{page.pageSize}
+  </select>
+  
+  <select id="getProductBachListth" parameterType="map" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from mes_product
+  	<include refid="querySometh" />
+  	order by id desc
+  	limit #{page.offset},#{page.pageSize}
+  </select>
+  
+  <select id="queryBindRele" parameterType="map" resultMap="BaseResultMap">
+  	SELECT P.*
+	FROM mes_product c
+	INNER JOIN mes_product p
+	ON c.`product_id` = p.`p_id`
+	WHERE p.`p_id` = #{dto.productId}
+	ORDER BY p.`id` desc
+	limit #{page.offset},#{page.pageSize}
+  </select>
+  
+  <select id = "queryBindMuch" parameterType="map" resultType="int">
+  	select count(*)
+  	FROM mes_product c
+	INNER JOIN mes_product p
+	ON c.`product_id` = p.`p_id`
+	WHERE p.`p_id` = #{dto.productId}
+  </select>
+
+	<update id="updateStatus" parameterType="java.lang.String">
+		update mes_product 
+		set 
+		product_status=1
+		where id=#{id}
+	</update>
+	
+	<update id="LupdateStatus" parameterType="java.lang.String">
+		update mes_product 
+		set 
+		product_status=0
+		where id=#{id}
+	</update>
+
+	<update id="updateProductRealWeight" parameterType="map">
+		update mes_product set p_id = #{dto.productId},product_realweight=#{dto.targetweight}
+		where id = #{dto.id}
+	</update>
+	
+	<update id="updateProductBakWeight" parameterType="map">
+		update mes_product set product_bakweight = product_bakweight-#{dto.targetweight}
+		where id = #{dto.faId}
+	</update>
+	
+	<update id="LupdateProductBakWeight" parameterType="map">
+		update mes_product set product_bakweight = product_bakweight+#{dto.targetweight}
+		where id = #{dto.faId}
+	</update>
+	
+	<update id="LupdateProductRealWeight" parameterType="map">
+		update mes_product set p_id = null,product_realweight=0
+		where id = #{dto.id}
+	</update>
+
+	<sql id="querySome">
+		<where>
+			<if test="dto.keyword != null and dto.keyword != '' ">
+			and ((product_targetweight like #{dto.keyword}) or (product_materialname like #{dto.keyword})
+			or (product_irontype like #{dto.keyword}) or (product_irontypeweight like #{dto.keyword})
+			or (product_remark like #{dto.keyword}))
+			
+			</if>
+			<if test="dto.productMaterialsource != null">
+			and product_materialsource = #{dto.productMaterialsource}
+			</if>
+			
+			<if test="dto.productMaterialsource == null">
+			and product_materialsource in ('钢材','废料','外购件','外协件')
+			</if>
+			
+			<if test="dto.productHeatNumber != null">
+			and product_heatnumber = #{dto.productHeatNumber}
+			</if>
+			
+			<if test="dto.productStatus != null ">
+			and product_status = #{dto.productStatus}
+			</if>
+			
+			<if test="dto.pidIsNull == null">
+			and p_id is null
+			
+			</if>
+			<if test="dto.pidIsNull != null">
+			and p_id is not null
+			
+			</if>
+			
+		</where>
+	</sql>
+	
+	<sql id="querySometh">
+		<where>
+			<if test="dto.keyword != null and dto.keyword != '' ">
+			and ((product_targetweight like #{dto.keyword}) or (product_materialname like #{dto.keyword})
+			or (product_irontype like #{dto.keyword}) or (product_irontypeweight like #{dto.keyword})
+			or (product_remark like #{dto.keyword}))
+			
+			</if>
+			<if test="dto.productMaterialsource != null">
+			and product_materialsource = #{dto.productMaterialsource}
+			</if>
+			
+			<if test="dto.productMaterialsource == null">
+			and product_materialsource in ('钢材','废料','外购件','外协件')
+			</if>
+			
+			<if test="dto.productHeatNumber != null">
+			and product_heatnumber = #{dto.productHeatNumber}
+			</if>
+			
+			<if test="dto.productStatus != null ">
+			and product_status = #{dto.productStatus}
+			</if>
+			
+			
+		</where>
+	</sql>
+	
+</mapper>
